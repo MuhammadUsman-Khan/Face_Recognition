@@ -2,26 +2,31 @@ import cv2
 import os 
 import numpy as np
 
-dataset_path = "dataset"
+dataset_path = r"dataset"
 names = []
 faces = []
 labels = []
 
 label_id = 0
-for person_name in dataset_path:
-    person_folder = os.path.join(dataset_path, person_folder)
+for person_name in os.listdir(dataset_path):
+    person_folder = os.path.join(dataset_path, person_name)
 
-    if not person_folder:
+    if not os.listdir(person_folder):
         continue
 
     names.append(person_name)
-    for image_name in person_folder:
+    for image_name in os.listdir(person_folder):
         img_path = os.path.join(person_folder, image_name)
         img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+        if img is None:
+            print(f"Cannot read image: {img_path}")  
+            continue
         faces.append(img)
         labels.append(label_id)
 
-        label_id =+ 1
+    label_id += 1
+
+print(f"Loaded {len(faces)} images of {len(names)} people.")
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.train(faces, np.array(labels))
@@ -39,13 +44,13 @@ while True:
 
     face_detected = face_cascade.detectMultiScale(gray, 1.3, 5)
     
-    for (x, y, w, h) in faces:
-        face = gray[y:y+w, x:x+h]
+    for (x, y, w, h) in face_detected:
+        face = gray[y:y+h, x:x+w]
 
         label, confidence = recognizer.predict(face)
 
         if confidence > 70:
-            name = name[label]
+            name = names[label]
 
         else:
             name = "Unknown"

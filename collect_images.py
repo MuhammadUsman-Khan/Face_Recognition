@@ -41,8 +41,7 @@ while True:
     elif key == ord('c') and len(faces) < 1:
         print("No faces Captured")
 
-    else:
-        print("Enter a valid Key")
+    
 
 cap.release()
 cv2.destroyAllWindows()
