@@ -4,7 +4,7 @@ import os
 if not os.path.exists("dataset"):
     os.makedirs("dataset")
 
-name = input("Enter Person's Name")
+name = input("Enter Person's Name: ")
 
 person_dir = "dataset/" + name
 if not os.path.exists(person_dir):
@@ -33,7 +33,7 @@ while True:
         face = gray[y:y+h, x:x+w]
         cv2.imwrite(f"{person_dir}/{count}.jpg", face)
         print(f"Saved: {person_dir}/{count}.jpg")
-        count =+ 1
+        count += 1
 
     elif key == ord('q'):
         break

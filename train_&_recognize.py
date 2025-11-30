@@ -48,8 +48,9 @@ while True:
         face = gray[y:y+h, x:x+w]
 
         label, confidence = recognizer.predict(face)
+        print(f"Predicted label: {label}, Confidence: {confidence}")
 
-        if confidence > 70:
+        if confidence < 70:
             name = names[label]
 
         else:
