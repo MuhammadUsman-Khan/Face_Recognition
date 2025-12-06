@@ -44,20 +44,16 @@ A robust yet beginner-friendly Face Recognition System that combines computer vi
 
 ```
 Face_Recognition/
-│── dataset/
-│    ├── Person1/
-│    │      ├── img1.jpg
-│    │      ├── img2.jpg
-│    ├── Person2/
-│           ├── img1.jpg
-│           ├── img2.jpg
 │
-│── capture_faces.py         # Capture face images
-│── train_model.py           # Train LBPH model
-│── recognize.py             # Live recognition
-│── app.py                   # Tkinter GUI (Capture + Train + Recognize)
-│── haarcascade_frontalface_default.xml
-│── README.md
+├── cli_based/
+│   ├── collect_images.py        # Capture images for each person
+│   └── train_&_recognize.py     # Train model & recognize via command line
+│
+├── face_recognition.py          # Tkinter GUI + Face recognition
+├── requirements.txt             # Dependencies
+├── .gitignore
+└── README.md
+
 
 ```
 
